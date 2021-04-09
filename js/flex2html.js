@@ -16,8 +16,8 @@ function flex2html(element, json) {
          })
       }
    }
-   
-   document.getElementById(element).innerHTML += carousel
+
+   document.getElementById(element).innerHTML = carousel
    return carousel
 }
 
@@ -78,13 +78,13 @@ function bubble_object(json) {
       }
    }
    footer_object = footer_object.replace('<!-- inner -->', box)
-   
+
 
    bubble = bubble.replace('<!-- hero -->', hero_object)
    bubble = bubble.replace('<!-- header -->', header_object)
    bubble = bubble.replace('<!-- body -->', body_object)
    bubble = bubble.replace('<!-- footer -->', footer_object)
-   
+
    return bubble
 }
 function box_recursive(parent_box, json) {
@@ -162,7 +162,7 @@ function box_object(json) {
       fl = (flex >= 0) ? `fl${flex}` : ''
    }
    exabs = (position === 'absolute') ? 'ExAbs' : ''
-   
+
    if(spacing && spacing.indexOf("px") >= 0) {
       spc = ''
    } else {
@@ -222,7 +222,7 @@ function box_object(json) {
    } else {
       ExBdrRad = (cornerRadius) ? 'ExBdrRad' + upperalldigit(cornerRadius) : ''
    }
-   
+
    jfc = ''
    if(justifyContent && justifyContent !== '') {
       switch(justifyContent) {
@@ -337,14 +337,14 @@ function box_object(json) {
          style += `background: linear-gradient(${background.angle}, ${background.startColor} 0%, ${background.endColor} 100%);`
       }
    }
-   
+
    return `<div class="MdBx ${layout1} ${layout2} ${fl} ${exabs} ${exmgn} ${spc} ${ExBdr} ${ExBdrRad} ${jfc} ${alg} ${ext} ${exb} ${exl} ${exr} ${ExPadA} ${ExPadT} ${ExPadB} ${ExPadL} ${ExPadR}" style="${style}"><!-- content --></div>`
 }
 
 function button_object(json) {
    style2 = ''
    style3 = ''
-   
+
    let {flex, margin, position, height, style, color, gravity, adjustMode, offsetTop, offsetBottom, offsetStart, offsetEnd, action} = json
 
    fl = ''
@@ -354,7 +354,7 @@ function button_object(json) {
       fl = (flex >= 0) ? `fl${flex}` : ''
    }
    exabs = (position === 'absolute') ? 'ExAbs' : ''
-   
+
    if(margin && margin.indexOf("px") >= 0) {
       style2 += `margin-top:${margin};`
       exmgn = ''
@@ -364,7 +364,7 @@ function button_object(json) {
 
    height = (!height || height === '' || height === 'md') ? '' : 'Ex' + upperalldigit(height)
    grv = (gravity === 'bottom' || gravity === 'center') ? 'grv' + upper1digit(gravity) : '';
-  
+
    ExBtn = 'ExBtnL'
    if(style && style !== '') {
       switch(style) {
@@ -432,7 +432,7 @@ function icon_object(json) {
    let style2 = ''
    let {size, aspectRatio, url, position, margin, offsetTop, offsetBottom, offsetStart, offsetEnd} = json
    let styleimg = `background-image:url('${url}');`
-   
+
    size = (!size || size === '') ? 'md' : size
    if(size.indexOf("px") >= 0) {
       style2 += `font-size:${size};`
@@ -440,22 +440,22 @@ function icon_object(json) {
    } else {
       size = 'Ex' + upperalldigit(size)
    }
-      
+
    if(!aspectRatio || aspectRatio === '') {
       styleimg += `width:1em;`
    } else {
-      ratio = ratio[0]/ratio[1] 
+      ratio = ratio[0]/ratio[1]
       styleimg += `width:${ratio}em;`
    }
    exabs = (position === 'absolute') ? 'ExAbs' : ''
-   
+
    if(margin && margin.indexOf("px") >= 0) {
       style2 += `margin-top:${margin};`
       exmgn = ''
    } else {
       exmgn = (margin) ? 'ExMgnT' + upperalldigit(margin) : ''
    }
-   
+
    if(offsetTop && offsetTop.indexOf("px") >= 0) {
       style2 += `top:${offsetTop};`
       ext = ''
@@ -483,7 +483,7 @@ function icon_object(json) {
    } else {
       exr = (offsetEnd) ? 'ExR' + upperalldigit(offsetEnd) : ''
    }
-   
+
    return `<div class="MdIco fl0 ${size} ${exabs} ${exmgn} ${ext} ${exb} ${exl} ${exr}" style="${style2}" ><div><span style="${styleimg}"></span></div></div>`
 }
 function image_object(json) {
@@ -504,7 +504,7 @@ function image_object(json) {
    } else {
       size = 'Ex' + upperalldigit(size)
    }
-      
+
    if(!aspectRatio || aspectRatio === '') {
       ratio = '100'
    } else {
@@ -518,14 +518,14 @@ function image_object(json) {
       fl = (flex >= 0) ? `fl${flex}` : ''
    }
    exabs = (position === 'absolute') ? 'ExAbs' : ''
-   
+
    if(margin && margin.indexOf("px") >= 0) {
       style += `margin-top:${margin};`
       exmgn = ''
    } else {
       exmgn = (margin) ? 'ExMgnT' + upperalldigit(margin) : ''
    }
-   
+
    alg = (align === 'start' || align === 'end') ? 'alg' + upper1digit(align) : '';
    grv = (gravity === 'bottom' || gravity === 'center') ? 'grv' + upper1digit(gravity) : '';
 
@@ -556,7 +556,7 @@ function image_object(json) {
    } else {
       exr = (offsetEnd) ? 'ExR' + upperalldigit(offsetEnd) : ''
    }
-   
+
    return `<div class="MdImg Ex${aspectMode} ${fl} ${size} ${exabs} ${exmgn} ${alg} ${grv} ${ext} ${exb} ${exl} ${exr}"  style="${style}">
                   <div style="${style2}">
                      <a style="padding-bottom:${ratio}%;">
@@ -595,7 +595,7 @@ function span_object(json) {
 
    let style2 = ''
    let {text, size, color, weight, style, decoration} = json
-   
+
    if(size && size !== '') {
       if(size.indexOf("px") >= 0) {
          style2 += `font-size:${size};`
@@ -606,14 +606,14 @@ function span_object(json) {
    } else {
       size = ''
    }
-   
+
    if(color && color!=='') {
       style2 += `color:${color};`
    }
    ExWB = (weight === 'bold') ? 'ExWB' : ''
    ExFntSty = (style === 'normal') ? 'ExFntStyNml' : (style === 'italic') ? 'ExFntStyIt' : ''
    ExTxtDec = (decoration === 'line-through') ? 'ExTxtDecLt' : (decoration === 'underline') ? 'ExTxtDecUl' : (decoration === 'none') ? 'ExTxtDecNone' : ''
-  
+
    return `<span class="MdSpn ${ExWB} ${size} ${ExFntSty} ${ExTxtDec}" style="${style2}" >${text}</span>`
 }
 function carousel_struc() {
@@ -643,10 +643,10 @@ function footer_struc() {
    return `<div class="t1Footer"><!-- inner --></div>`
 }
 function text_object(json) {
-   
+
    let style2 = ''
    let {flex, margin, size, position, align, gravity, text, color, weight, style, decoration, wrap, maxLines, adjustMode, offsetTop, offsetBottom, offsetStart, offsetEnd} = json
-   
+
    fl = ''
    if(flex > 3) {
       style2 += `-webkit-box-flex:${flex};flex-grow:${flex};`
@@ -654,14 +654,14 @@ function text_object(json) {
       fl = (flex >= 0) ? `fl${flex}` : ''
    }
    exabs = (position === 'absolute') ? 'ExAbs' : ''
-   
+
    if(margin && margin.indexOf("px") >= 0) {
       style2 += `margin-top:${margin};`
       exmgn = ''
    } else {
       exmgn = (margin) ? 'ExMgnL' + upperalldigit(margin) : ''
    }
-   
+
    alg = (align === 'start' || align === 'end' || align === 'center') ? 'ExAlg' + upper1digit(align) : '';
    grv = (gravity === 'bottom' || gravity === 'center') ? 'grv' + upper1digit(gravity) : '';
    size = (!size || size === '') ? 'md' : size
@@ -706,7 +706,7 @@ function text_object(json) {
    } else {
       exr = (offsetEnd) ? 'ExR' + upperalldigit(offsetEnd) : ''
    }
-   text = (!text) ? '' : text 
+   text = (!text) ? '' : text
    return `<div class="MdTxt ${fl} ${exabs} ${exmgn} ${alg} ${grv} ${size} ${ExWB} ${ExFntSty} ${ExTxtDec} ${ExWrap} ${ext} ${exb} ${exl} ${exr}" style="${style2}"><p>${text}<!-- content --></p></div>`
 }
 function upper1digit(str) {
